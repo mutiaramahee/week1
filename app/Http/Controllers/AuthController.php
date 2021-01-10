@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Validator,Redirect,Response;
-Use App\User;
 use Illuminate\Support\Facades\Auth;
-use Hash;
-use Session;
+use Validator, Redirect, Response, Hash, Session, DB;
+use App\User;
 
 class AuthController extends Controller
 {
@@ -119,6 +117,11 @@ class AuthController extends Controller
 
     public function dashboard()
     {
-      return view('pages.index');
+        $provinsi = DB::table('provinsi')->count();
+        $kab = DB::table('kabupaten_kota')->count();
+        $kecamatan = DB::table('kecamatan')->count();
+        $kelurahan = DB::table('kelurahan')->count();
+        $participant = DB::table('participant')->count();
+        return view('pages.index', ['provinsi' => $provinsi, 'kab' => $kab, 'kecamatan' => $kecamatan, 'kelurahan' => $kelurahan, 'participant' => $participant]);
     }
 }
