@@ -66,7 +66,8 @@ class KabupatenKotaController extends Controller
         }
     }
 
-    public function destroy(KabupatenKota $kab){
+    public function destroy($id){
+        $kab = KabupatenKota::find($id);
         $delete = $kab->delete();
         if($delete){
             return redirect()->route('kabupaten-kota.index')
